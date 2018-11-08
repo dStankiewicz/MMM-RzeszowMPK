@@ -1,0 +1,15 @@
+div.inline
+{
+  display: inline-block;
+}
+
+div.left
+{
+	min-width: 30px;
+	text-align: right;
+}
+
+div.right
+{
+  float: right;
+}
