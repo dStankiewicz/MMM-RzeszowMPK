@@ -11,7 +11,7 @@
  Module.register("MMM-RzeszowMPK", {
  	defaults: {
  		busStopId: 5,
- 		updateInterval: 60 * 1000,
+ 		updateInterval: 10 * 1000,
  		timetableUrl: 'http://einfo.erzeszow.pl/Home/GetTimetableReal?busStopId=',
  		header: 'Rzeszów MPK',
  		5: "Matysówka",
@@ -67,7 +67,9 @@
 
 		for (var c in this.timetable.Schedules.Stop[0].Day[0].R)
 		{
+			var opacity = 1 - c / this.timetable.Schedules.Stop[0].Day[0].R.length;
 			var singleDiv = document.createElement('div');
+			singleDiv.style = "opacity: " + opacity + ";";
 
 			var single = this.timetable.Schedules.Stop[0].Day[0].R[c];
 			var lineNr = single.$["nr"];
