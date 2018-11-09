@@ -13,3 +13,19 @@ div.right
 {
   float: right;
 }
+
+.red
+{
+	color: red;
+}
+
+.yellow
+{
+	color: yellow;
+}
+
+div.desc
+{
+	padding-left: 8px;
+	opacity: 0.5;
+}

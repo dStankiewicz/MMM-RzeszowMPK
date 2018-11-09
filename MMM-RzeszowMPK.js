@@ -13,7 +13,8 @@
  		busStopId: 5,
  		updateInterval: 60 * 1000,
  		timetableUrl: 'http://einfo.erzeszow.pl/Home/GetTimetableReal?busStopId=',
- 		header: 'Rzeszów MPK'
+ 		header: 'Rzeszów MPK',
+ 		5: "Matysówka",
  	},
 
 	start: function() {
@@ -33,6 +34,26 @@
 		return ["timetable.css"];
 	},
 
+	isSoon: function(single) {
+		if (single.includes('min'))
+		{
+			return true;
+		}
+		return false;
+	},
+
+	getMinToGo: function(single) {
+		if (single === "<1min")
+		{
+			return 0;
+		}
+		return single.substring(0, single.indexOf(" "));
+	},
+
+	isTicketMachine: function(single) {
+		return single.$["vuw"].includes('B');
+	},
+
  	getDom: function() {
 		var wrapper = document.createElement("div");
 
@@ -49,14 +70,44 @@
 			var singleDiv = document.createElement('div');
 
 			var single = this.timetable.Schedules.Stop[0].Day[0].R[c];
-			var lineNr = document.createElement('div');
-			lineNr.className = "inline title bright left"
-			lineNr.innerHTML = single.$["nr"];
-			singleDiv.appendChild(lineNr);
+			var lineNr = single.$["nr"];
+			var lineNrWrapper = document.createElement('div');
+			lineNrWrapper.className = "inline title bright left"
+			lineNrWrapper.innerHTML = lineNr;
+			singleDiv.appendChild(lineNrWrapper);
+
+			var desc = document.createElement('div');
+			desc.className = "inline bright left desc";
+			if (typeof this.config[lineNr] !== "undefined")
+			{
+				desc.innerHTML = this.config[lineNr];
+			}
+			singleDiv.appendChild(desc);
+
+			var ticketsWrapper = document.createElement('div');
+			ticketsWrapper.className = "inline bright right "
+			if (this.isTicketMachine(single))
+			{
+				ticketsWrapper.innerHTML = '<i class="fas fa-tablet-alt"></i>';
+			}
+			singleDiv.appendChild(ticketsWrapper);
 
 			var time = document.createElement('div');
-			time.innerHTML = single.S[0].$["t"];
-			time.className = "inline time bright right";
+			var timeValue = single.S[0].$["t"];
+			if (this.isSoon(timeValue))
+			{
+				var minutes = this.getMinToGo(timeValue);
+				if (minutes < 16 && minutes >= 6)
+				{
+					time.className = "yellow ";
+				}
+				if (minutes < 6)
+				{
+					time.className = "red ";
+				}
+			}
+			time.innerHTML = timeValue;
+			time.className += "inline time bright right ";
 			singleDiv.appendChild(time);
 			// line.
 			wrapper.appendChild(singleDiv);
