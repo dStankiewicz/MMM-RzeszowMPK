@@ -108,7 +108,7 @@
 			ticketsWrapper.className = "inline bright right "
 			if (this.isTicketMachine(single))
 			{
-				ticketsWrapper.innerHTML = '<span class="fa fa-tablet"></span>';
+				ticketsWrapper.innerHTML = '<span class="fa fa-tablet-alt" style="padding-right: 0.5em;"></span>';
 			}
 			singleDiv.appendChild(ticketsWrapper);
 			// line.
