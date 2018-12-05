@@ -31,7 +31,7 @@
 	},
 
 	getStyles: function () {
-		return ["timetable.css"];
+		return ["timetable.css", "https://use.fontawesome.com/releases/v5.5.0/css/all.css"];
 	},
 
 	isSoon: function(single) {
@@ -90,7 +90,7 @@
 			ticketsWrapper.className = "inline bright right "
 			if (this.isTicketMachine(single))
 			{
-				ticketsWrapper.innerHTML = '<i class="fas fa-tablet-alt"></i>';
+				ticketsWrapper.innerHTML = '<span class="fa fa-tablet"></span>';
 			}
 			singleDiv.appendChild(ticketsWrapper);
 
