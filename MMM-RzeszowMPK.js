@@ -86,14 +86,6 @@
 			}
 			singleDiv.appendChild(desc);
 
-			var ticketsWrapper = document.createElement('div');
-			ticketsWrapper.className = "inline bright right "
-			if (this.isTicketMachine(single))
-			{
-				ticketsWrapper.innerHTML = '<span class="fa fa-tablet"></span>';
-			}
-			singleDiv.appendChild(ticketsWrapper);
-
 			var time = document.createElement('div');
 			var timeValue = single.S[0].$["t"];
 			if (this.isSoon(timeValue))
@@ -111,6 +103,14 @@
 			time.innerHTML = timeValue;
 			time.className += "inline time bright right ";
 			singleDiv.appendChild(time);
+
+			var ticketsWrapper = document.createElement('div');
+			ticketsWrapper.className = "inline bright right "
+			if (this.isTicketMachine(single))
+			{
+				ticketsWrapper.innerHTML = '<span class="fa fa-tablet"></span>';
+			}
+			singleDiv.appendChild(ticketsWrapper);
 			// line.
 			wrapper.appendChild(singleDiv);
 		};
